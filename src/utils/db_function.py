@@ -1,14 +1,18 @@
 from flask_sqlalchemy import SQLAlchemy
 
+from src.utils.helper_funtions import load_db_config
+
 db = SQLAlchemy()
 
 def create_db_connection():
-    print("This is db connection function")
-    db_user = "onkarkodape"
-    db_pwd = "i4Sb6uOhFfys"
-    db_host = "ep-round-pine-a3wca0wp.il-central-1.aws.neon.tech"
-    db_port = "5432"  # Replace with your actual port
-    db_name = "python_db"
+    content = load_db_config()
+    print("This is db connection function----------",content)
+
+    db_user = content['db_user']
+    db_pwd = content["db_pwd"]
+    db_host = content['db_host']
+    db_port = content['db_port']
+    db_name = content['db_name']
     db_connection_string = (
         f"postgresql://{db_user}:{db_pwd}@{db_host}:{db_port}/{db_name}?sslmode=require"
     )
@@ -35,6 +39,9 @@ def dict_fetch_all(cursor):
     """
     print("Inside dictfetchall.")
     columns = [col[0] for col in cursor.description]
+
+    print("***********************************************",columns)
+
     return [
         dict(zip(columns, row))
         for row in cursor.fetchall()
