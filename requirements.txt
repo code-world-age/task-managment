@@ -4,5 +4,3 @@ Werkzeu==3.0.1
 Flask-SQLAlchemy==3.1.1
 SQLAlchemy==2.0.25
 psycopg2-binary==2.9.9
-
-new
